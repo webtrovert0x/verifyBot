@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+*/node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+build/
+dist/
+.next/
+*/.next/
+out/
+
+# Environment files (CRITICAL - NEVER COMMIT SECRETS)
+.env
+.env.local
+.env.*
+*/.env
+*/.env.local
+*/.env.*
+!.env.example
+!*/.env.example
+
+# Hardhat & Foundry artifacts
+cache/
+*/cache/
+artifacts/
+*/artifacts/
+
+# OS files
+.DS_Store
+*.pem
+*.log
