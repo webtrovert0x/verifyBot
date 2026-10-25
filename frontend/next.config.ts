@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_CONTRACT_ADDRESS:
       process.env.CONTRACT_ADDRESS || "0xBFCDDC2F013106eE4e882d6C5DD10409d00E76e3",
   },
+  serverExternalPackages: ["pino", "pino-pretty"],
+  turbopack: {},
 };
 
 export default nextConfig;
