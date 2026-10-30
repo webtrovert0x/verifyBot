@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
-import { bohrTestnet } from "@/config/bohr";
+import { botchainMainnet } from "@/config/bohr";
 
 export const projectId =
   process.env.NEXT_PUBLIC_PROJECT_ID || "d9690df1851903b53a4f8c440127edec";
@@ -13,12 +13,12 @@ export const projectId =
 const metadata = {
   name: "VerifyBOT",
   description: "Smart Contract Risk Analyzer & On-Chain Audit Registry for BOT Chain",
-  url: "https://verifybot.bohr.life",
+  url: "https://verifybot.botchain.ai",
   icons: ["https://avatars.githubusercontent.com/u/179229932"],
 };
 
 export const wagmiAdapter = new WagmiAdapter({
-  networks: [bohrTestnet],
+  networks: [botchainMainnet],
   projectId,
   ssr: true,
 });
@@ -26,7 +26,7 @@ export const wagmiAdapter = new WagmiAdapter({
 if (typeof window !== "undefined") {
   createAppKit({
     adapters: [wagmiAdapter],
-    networks: [bohrTestnet],
+    networks: [botchainMainnet],
     projectId,
     metadata,
     themeMode: "dark",

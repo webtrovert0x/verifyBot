@@ -173,13 +173,13 @@ $$\text{ReportHash} = \text{keccak256}(\text{CanonicalReport})$$
 
 | Parameter | Specification |
 | :--- | :--- |
-| **Network** | Bohr Chain (BOT Chain) |
-| **Chain ID** | `968` |
-| **RPC Endpoint** | `https://rpc.bohr.life` |
+| **Network** | BOT Chain Mainnet |
+| **Chain ID** | `677` |
+| **RPC Endpoint** | `https://rpc.botchain.ai` |
 | **Native Token** | BOT (18 Decimals) |
-| **Block Explorer** | [https://scan.bohr.life](https://scan.bohr.life) |
-| **VerifyBOTRegistry Address** | [`0xBFCDDC2F013106eE4e882d6C5DD10409d00E76e3`](https://scan.bohr.life/address/0xBFCDDC2F013106eE4e882d6C5DD10409d00E76e3) |
-| **Compiler Version** | Solidity `v0.8.24+commit.e11b9ed9` (EVM: `paris`, Runs: `200`) |
+| **Block Explorer** | [https://scan.botchain.ai](https://scan.botchain.ai) |
+| **VerifyBOTRegistry Address** | [`0x9e785Ad3Bf508ff1119c62EbC7D7A7D06621f0DF`](https://scan.botchain.ai/address/0x9e785Ad3Bf508ff1119c62EbC7D7A7D06621f0DF#code) |
+| **Compiler Version** | Solidity `v0.8.24+commit.e11b9ed9` (Runs: `200`) |
 
 ---
 

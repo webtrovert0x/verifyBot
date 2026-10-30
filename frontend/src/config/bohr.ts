@@ -1,8 +1,8 @@
 import { defineChain } from "viem";
 
-export const bohrTestnet = defineChain({
-  id: 968,
-  name: "Bohr Chain",
+export const botchainMainnet = defineChain({
+  id: 677,
+  name: "BOT Chain",
   nativeCurrency: {
     name: "BOT",
     symbol: "BOT",
@@ -10,14 +10,17 @@ export const bohrTestnet = defineChain({
   },
   rpcUrls: {
     default: {
-      http: [process.env.NEXT_PUBLIC_RPC_URL || "https://rpc.bohr.life"],
+      http: [process.env.NEXT_PUBLIC_RPC_URL || "https://rpc.botchain.ai"],
     },
   },
   blockExplorers: {
     default: {
-      name: "BohrScan",
-      url: process.env.NEXT_PUBLIC_EXPLORER_URL || "https://scan.bohr.life",
+      name: "BotScan",
+      url: process.env.NEXT_PUBLIC_EXPLORER_URL || "https://scan.botchain.ai",
     },
   },
-  testnet: true,
+  testnet: false,
 });
+
+// Alias for compatibility
+export const bohrTestnet = botchainMainnet;

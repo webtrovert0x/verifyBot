@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     const formattedKey = (rawKey.startsWith("0x") ? rawKey : `0x${rawKey}`) as `0x${string}`;
     const account = privateKeyToAccount(formattedKey);
 
-    const rpcUrl = process.env.RPC_URL || process.env.NEXT_PUBLIC_RPC_URL || "https://rpc.bohr.life";
+    const rpcUrl = process.env.RPC_URL || process.env.NEXT_PUBLIC_RPC_URL || "https://rpc.botchain.ai";
     const registryAddress = (process.env.CONTRACT_ADDRESS ||
       process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
       registryArtifact.address) as `0x${string}`;
@@ -50,12 +50,13 @@ export async function POST(req: NextRequest) {
     // Wait for confirmation
     const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash });
 
+    const explorerBase = process.env.EXPLORER_URL || process.env.NEXT_PUBLIC_EXPLORER_URL || "https://scan.botchain.ai";
     return NextResponse.json({
       success: true,
       txHash,
       status: receipt.status,
       blockNumber: Number(receipt.blockNumber),
-      explorerUrl: `https://scan.bohr.life/tx/${txHash}`,
+      explorerUrl: `${explorerBase}/tx/${txHash}`,
     });
   } catch (error: any) {
     console.error("API /api/commit-report error:", error);

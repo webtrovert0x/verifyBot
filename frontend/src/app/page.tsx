@@ -77,7 +77,9 @@ interface SecurityReport {
 
 const REGISTRY_ADDRESS = (process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
   registryArtifact.address ||
-  "0xBFCDDC2F013106eE4e882d6C5DD10409d00E76e3") as `0x${string}`;
+  "0x9e785Ad3Bf508ff1119c62EbC7D7A7D06621f0DF") as `0x${string}`;
+
+const EXPLORER_URL = process.env.NEXT_PUBLIC_EXPLORER_URL || "https://scan.botchain.ai";
 
 export default function Home() {
   const { open } = useAppKit();
@@ -123,11 +125,11 @@ export default function Home() {
   const presets = [
     {
       name: "VerifyBOTRegistry (Live Audit Registry)",
-      address: "0xBFCDDC2F013106eE4e882d6C5DD10409d00E76e3",
+      address: REGISTRY_ADDRESS,
     },
     {
-      name: "TraceBOTRegistry (Forensics Contract)",
-      address: "0x358d360A6b59b4d45CC96A012A083f6196CA9d45",
+      name: "WBOT (Wrapped BOT Token)",
+      address: "0xD5452816194a3784dBa983426cCe7c122F4abd30",
     },
   ];
 
@@ -166,7 +168,7 @@ export default function Home() {
   // Submit on-chain requestScan transaction (Gas only)
   const handleRequestScan = async () => {
     if (!isAddress(inputAddress)) {
-      setErrorMessage("Please enter a valid Bohr contract address.");
+      setErrorMessage("Please enter a valid BOT Chain contract address.");
       return;
     }
     if (!isConnected) {
@@ -190,7 +192,7 @@ export default function Home() {
   // Submit on-chain checkReport transaction (Gas only)
   const handleCheckReport = async () => {
     if (!isAddress(inputAddress)) {
-      setErrorMessage("Please enter a valid Bohr contract address.");
+      setErrorMessage("Please enter a valid BOT Chain contract address.");
       return;
     }
     if (!isConnected) {
@@ -303,9 +305,15 @@ export default function Home() {
           </div>
 
           <div className="nav-actions">
-            <div className="network-pill">
-              <span className="network-dot"></span>
-              <span>Bohr Chain (968)</span>
+            <div className="network-pill" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+              <img
+                src="/botchain-logo.png"
+                alt="BOT Chain"
+                width={16}
+                height={16}
+                style={{ borderRadius: "50%", display: "block" }}
+              />
+              <span>BOT Chain (677)</span>
             </div>
 
             <button
@@ -340,7 +348,7 @@ export default function Home() {
           <div className="stat-box">
             <div className="stat-label">Registry Contract</div>
             <a
-              href={`https://scan.bohr.life/address/${REGISTRY_ADDRESS}`}
+              href={`${EXPLORER_URL}/address/${REGISTRY_ADDRESS}`}
               target="_blank"
               rel="noreferrer"
               style={{
@@ -355,7 +363,7 @@ export default function Home() {
               <span>{REGISTRY_ADDRESS.slice(0, 8)}...{REGISTRY_ADDRESS.slice(-6)}</span>
               <ExternalLink size={12} />
             </a>
-            <div className="stat-sub">VerifyBOTRegistry on Bohr</div>
+            <div className="stat-sub">VerifyBOTRegistry on BOT Chain</div>
           </div>
 
           <div className="stat-box">
@@ -387,7 +395,7 @@ export default function Home() {
         <div className="search-card">
           <div className="search-label-row">
             <span style={{ fontWeight: 600, color: "#f8fafc" }}>Target Smart Contract Address</span>
-            <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>Bohr EVM Address (0x...)</span>
+            <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>BOT Chain EVM Address (0x...)</span>
           </div>
 
           <div className="search-input-group">
@@ -431,7 +439,7 @@ export default function Home() {
               {isTxPending || isTxConfirming ? (
                 <>
                   <RefreshCw size={16} className="animate-spin" />
-                  <span>Confirming on Bohr...</span>
+                  <span>Confirming on BOT Chain...</span>
                 </>
               ) : (
                 <>
@@ -485,14 +493,14 @@ export default function Home() {
             <div className="callout callout-cyan" style={{ marginTop: "1rem" }}>
               <CheckCircle2 size={18} style={{ flexShrink: 0, marginTop: "2px" }} />
               <div style={{ flex: 1, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "0.5rem" }}>
-                <span>{isTxConfirming ? "Transaction submitted to Bohr Chain, waiting for confirmation..." : "Transaction Confirmed on Bohr!"}</span>
+                <span>{isTxConfirming ? "Transaction submitted to BOT Chain, waiting for confirmation..." : "Transaction Confirmed on BOT Chain!"}</span>
                 <a
-                  href={`https://scan.bohr.life/tx/${txHash}`}
+                  href={`${EXPLORER_URL}/tx/${txHash}`}
                   target="_blank"
                   rel="noreferrer"
                   style={{ display: "inline-flex", alignItems: "center", gap: "4px", fontWeight: 600 }}
                 >
-                  <span>View BohrScan Tx</span>
+                  <span>View BotScan Tx</span>
                   <ExternalLink size={12} />
                 </a>
               </div>
@@ -508,7 +516,7 @@ export default function Home() {
               Investigating Target Contract
             </div>
             <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", maxWidth: "480px", margin: "0 auto" }}>
-              Extracting bytecode from Bohr RPC, probing ERC-1967 storage slots, checking BohrScan verified source code,
+              Extracting bytecode from BOT Chain RPC, probing ERC-1967 storage slots, checking BotScan verified source code,
               and calculating security risk factors...
             </p>
           </div>
@@ -596,7 +604,7 @@ export default function Home() {
                 {(!onChainReport || !onChainReport.exists) && (
                   <div style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid var(--border-light)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "0.75rem" }}>
                     <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-                      Publish this verified report hash to VerifyBOTRegistry on Bohr:
+                      Publish this verified report hash to VerifyBOTRegistry on BOT Chain:
                     </span>
                     <button
                       type="button"
@@ -607,7 +615,7 @@ export default function Home() {
                       {committingHash ? (
                         <>
                           <RefreshCw size={14} className="animate-spin" />
-                          <span>Committing to Bohr...</span>
+                          <span>Committing to BOT Chain...</span>
                         </>
                       ) : (
                         <>
@@ -621,14 +629,14 @@ export default function Home() {
 
                 {commitSuccessTx && (
                   <div className="callout callout-success" style={{ marginTop: "1rem", fontSize: "0.8rem" }}>
-                    <span>Report Hash successfully committed to Bohr Chain!</span>
+                    <span>Report Hash successfully committed to BOT Chain!</span>
                     <a
-                      href={`https://scan.bohr.life/tx/${commitSuccessTx}`}
+                      href={`${EXPLORER_URL}/tx/${commitSuccessTx}`}
                       target="_blank"
                       rel="noreferrer"
                       style={{ fontWeight: 600, marginLeft: "auto" }}
                     >
-                      View Tx
+                      View Tx on BotScan
                     </a>
                   </div>
                 )}
@@ -728,7 +736,7 @@ export default function Home() {
               {/* 4. Source Verification */}
               <div className="stat-box">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
-                  <span className="stat-label">BohrScan Source</span>
+                  <span className="stat-label">BotScan Source</span>
                   {report.isSourceVerified ? (
                     <span className="badge badge-safe">Verified</span>
                   ) : (
@@ -745,18 +753,16 @@ export default function Home() {
                 <div className="stat-sub">
                   {report.isSourceVerified
                     ? "Source code matches compiled on-chain bytecode."
-                    : "No public source published on BohrScan explorer."}
+                    : "No public source published on BotScan explorer."}
                 </div>
               </div>
             </div>
 
             {/* Findings Breakdown */}
             <div className="card">
-              <div className="card-header">
-                <div className="card-title">
-                  <ShieldAlert size={20} color="#00f0ff" />
-                  <span>Detected Risk Findings & Patterns ({report.findings.length})</span>
-                </div>
+              <div className="card-title" style={{ marginBottom: "1rem" }}>
+                <ShieldAlert size={20} color="#00f0ff" />
+                <span>Detected Risk Findings & Patterns ({report.findings.length})</span>
               </div>
 
               <div>
@@ -806,18 +812,84 @@ export default function Home() {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <div style={{ marginBottom: "0.5rem" }}>
-            VerifyBOT • Smart Contract Risk Analyzer for Bohr Chain (BOT Chain)
-          </div>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8rem" }}>
-            Registry:{" "}
-            <a
-              href={`https://scan.bohr.life/address/${REGISTRY_ADDRESS}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {REGISTRY_ADDRESS}
-            </a>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.25rem" }}>
+            
+            {/* Clickable BOT Chain official links with original logo in front */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.25rem", flexWrap: "wrap" }}>
+              <a
+                href="https://botchain.ai"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  color: "#f8fafc",
+                  fontWeight: 600,
+                  fontSize: "0.9rem",
+                  textDecoration: "none",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "8px",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                }}
+              >
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  width={20}
+                  height={20}
+                  style={{ borderRadius: "50%", display: "block" }}
+                />
+                <span>https://botchain.ai</span>
+                <ExternalLink size={14} style={{ opacity: 0.6 }} />
+              </a>
+
+              <a
+                href="https://scan.botchain.ai"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  color: "#f8fafc",
+                  fontWeight: 600,
+                  fontSize: "0.9rem",
+                  textDecoration: "none",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "8px",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                }}
+              >
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  width={20}
+                  height={20}
+                  style={{ borderRadius: "50%", display: "block" }}
+                />
+                <span>https://scan.botchain.ai</span>
+                <ExternalLink size={14} style={{ opacity: 0.6 }} />
+              </a>
+            </div>
+
+            <div style={{ color: "var(--text-secondary)", fontSize: "0.9rem" }}>
+              VerifyBOT • Smart Contract Risk Analyzer for <strong>BOT Chain</strong> (Mainnet 677)
+            </div>
+
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.8rem", color: "var(--text-muted)" }}>
+              Registry Contract:{" "}
+              <a
+                href={`${EXPLORER_URL}/address/${REGISTRY_ADDRESS}`}
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: "#00f0ff" }}
+              >
+                {REGISTRY_ADDRESS}
+              </a>
+            </div>
           </div>
         </div>
       </footer>

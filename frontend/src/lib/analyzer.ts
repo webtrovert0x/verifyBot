@@ -83,7 +83,7 @@ const SELECTORS = {
 
 export async function analyzeContract(targetAddress: string): Promise<SecurityReportData> {
   const checksumAddress = getAddress(targetAddress);
-  const rpcUrl = process.env.RPC_URL || process.env.NEXT_PUBLIC_RPC_URL || "https://rpc.bohr.life";
+  const rpcUrl = process.env.RPC_URL || process.env.NEXT_PUBLIC_RPC_URL || "https://rpc.botchain.ai";
 
   const publicClient = createPublicClient({
     chain: bohrTestnet,
@@ -150,7 +150,8 @@ export async function analyzeContract(targetAddress: string): Promise<SecurityRe
   let license = "Unspecified";
 
   try {
-    const explorerApi = `https://scan.bohr.life/api?module=contract&action=getsourcecode&address=${checksumAddress}`;
+    const explorerBase = process.env.EXPLORER_URL || process.env.NEXT_PUBLIC_EXPLORER_URL || "https://scan.botchain.ai";
+    const explorerApi = `${explorerBase}/api?module=contract&action=getsourcecode&address=${checksumAddress}`;
     const res = await fetch(explorerApi, { next: { revalidate: 30 } });
     if (res.ok) {
       const data = await res.json();

@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ||
       registryArtifact.address) as `0x${string}`;
 
-    const rpcUrl = process.env.RPC_URL || process.env.NEXT_PUBLIC_RPC_URL || "https://rpc.bohr.life";
+    const rpcUrl = process.env.RPC_URL || process.env.NEXT_PUBLIC_RPC_URL || "https://rpc.botchain.ai";
     const publicClient = createPublicClient({
       chain: bohrTestnet,
       transport: http(rpcUrl),

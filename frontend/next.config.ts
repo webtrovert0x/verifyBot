@@ -7,11 +7,11 @@ const nextConfig: NextConfig = {
       process.env.PROJECT_ID ||
       process.env.REOWN_PROJECT_ID ||
       "d9690df1851903b53a4f8c440127edec",
-    NEXT_PUBLIC_RPC_URL: process.env.RPC_URL || "https://rpc.bohr.life",
-    NEXT_PUBLIC_CHAIN_ID: process.env.CHAIN_ID || "968",
-    NEXT_PUBLIC_EXPLORER_URL: process.env.EXPLORER_URL || "https://scan.bohr.life",
+    NEXT_PUBLIC_RPC_URL: process.env.RPC_URL || "https://rpc.botchain.ai",
+    NEXT_PUBLIC_CHAIN_ID: process.env.CHAIN_ID || "677",
+    NEXT_PUBLIC_EXPLORER_URL: process.env.EXPLORER_URL || "https://scan.botchain.ai",
     NEXT_PUBLIC_CONTRACT_ADDRESS:
-      process.env.CONTRACT_ADDRESS || "0xBFCDDC2F013106eE4e882d6C5DD10409d00E76e3",
+      process.env.CONTRACT_ADDRESS || "0x9e785Ad3Bf508ff1119c62EbC7D7A7D06621f0DF",
   },
   serverExternalPackages: ["pino", "pino-pretty"],
   turbopack: {},
